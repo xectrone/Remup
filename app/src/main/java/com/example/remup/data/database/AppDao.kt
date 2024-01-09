@@ -28,7 +28,7 @@ interface AppDao {
     @Query("SELECT * FROM note_table WHERE id = :id")
     fun noteById(id: Int): Flow<List<Note>>
 
-    @Query("SELECT * FROM note_table WHERE id = 1 LIMIT 1")
-    fun firstNote():Note
+    @Query("SELECT * FROM note_table WHERE id = 1")
+    suspend fun firstNote():Note
 
 }

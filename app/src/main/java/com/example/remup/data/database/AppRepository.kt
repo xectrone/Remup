@@ -18,6 +18,6 @@ class AppRepository(private val appDao: AppDao){
     suspend fun deleteNote(note: Note) = appDao.deleteNote(note)
     fun noteList() = appDao.noteList()
     fun noteById(id: Int) = appDao.noteById(id)
-    fun firstNote() = appDao.firstNote()
+    suspend fun firstNote() = appDao.firstNote()
 
 }

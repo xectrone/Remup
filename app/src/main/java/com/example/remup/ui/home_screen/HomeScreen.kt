@@ -1,11 +1,12 @@
 package com.example.remup.ui.home_screen
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.GridCells
-import androidx.compose.foundation.lazy.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -26,6 +27,7 @@ import com.example.remup.ui.home_screen.search_app_bar.SearchAppBarViewModel
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeScreen(
@@ -86,7 +88,7 @@ fun HomeScreen(
         LazyVerticalGrid(
             modifier = modifier
                 .padding(horizontal = 6.5.dp),
-            cells = GridCells.Fixed(2),
+            columns = GridCells.Fixed(2),
             verticalArrangement = Arrangement.Top,
             horizontalArrangement = Arrangement.Start
         ){
