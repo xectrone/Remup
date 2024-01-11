@@ -26,9 +26,8 @@ interface AppDao {
     fun noteList(): Flow<List<Note>>
 
     @Query("SELECT * FROM note_table WHERE id = :id")
-    fun noteById(id: Int): Flow<List<Note>>
+    suspend fun noteById(id: Int): Note
 
-    @Query("SELECT * FROM note_table WHERE id = 1")
-    suspend fun firstNote():Note
-
+    @Query("SELECT * FROM note_table ORDER BY RANDOM() LIMIT 1")
+    suspend fun randomNote(): Note
 }

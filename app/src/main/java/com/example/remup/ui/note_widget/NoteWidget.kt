@@ -1,9 +1,11 @@
 package com.example.remup.ui.note_widget
 
+import android.annotation.SuppressLint
 import android.content.Context
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.datastore.preferences.core.stringPreferencesKey
@@ -31,6 +33,7 @@ import com.example.remup.MainActivity
 import com.example.remup.R
 import com.example.remup.data.database.AppDatabase
 import com.example.remup.data.database.AppRepository
+import com.example.remup.ui.theme.Dimen
 import dagger.hilt.EntryPoint
 import dagger.hilt.EntryPoints
 import dagger.hilt.InstallIn
@@ -46,6 +49,7 @@ class NoteWidget : GlanceAppWidget() {
     }
     //endregion
 
+    @SuppressLint("RestrictedApi")
     override suspend fun provideGlance(context: Context, id: GlanceId) {
 
         val viewModel = EntryPoints.get(context, NoteWidgetEntryPoint::class.java).getViewModel()
@@ -53,16 +57,48 @@ class NoteWidget : GlanceAppWidget() {
         viewModel.getNote()
 
         provideContent {
-            Box(
+            Column(
                 modifier = GlanceModifier
                     .fillMaxSize()
-                    .background(MaterialTheme.colors.background)
+                    .background(imageProvider = ImageProvider(R.drawable.round_corner_rectangle)),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(
+                Text(modifier = GlanceModifier
+                    .padding(Dimen.Padding.p3),
                     text = note,
+                    style = TextStyle(
+                        fontWeight = FontWeight.Normal,
+                        fontSize = 16.sp,
+                        color = ColorProvider(R.color.black)
+                    )
                 )
+                Button(
+                    modifier = GlanceModifier
+                        .padding(top = 0.dp, bottom = 6.dp, start = 7.dp, end = 7.dp),
+                    text = "⟳",
+                    style = TextStyle(
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 25.sp,
+                        textAlign = TextAlign.Center
+                    ),
+                    onClick = actionRunCallback(RefreshCallback::class.java),
+                    colors = ButtonDefaults.buttonColors(backgroundColor = ColorProvider(Color.Black.copy(alpha = 0.07f)))
+
+                )
+
+
             }
         }
+    }
+}
+class RefreshCallback: ActionCallback {
+    override suspend fun onAction(
+        context: Context,
+        glanceId: GlanceId,
+        parameters: ActionParameters
+    ) {
+        NoteWidget().update(context, glanceId)
     }
 }
 

@@ -35,7 +35,7 @@ fun AddEditNoteScreen(
 ) {
     val keyboard = LocalSoftwareKeyboardController.current
 
-    val navNoteList = noteViewModel.noteById(id).collectAsState(initial = emptyList()).value
+//    val navNoteList = noteViewModel.noteById(id)
     var navNote by remember { mutableStateOf(Note(0, "")) }
 
     var isNewNote by rememberSaveable { mutableStateOf(true)}
@@ -43,15 +43,15 @@ fun AddEditNoteScreen(
 
     var data by rememberSaveable { mutableStateOf("") }
 
-    LaunchedEffect(navNoteList.any())
-    {
-        if(navNoteList.any()) {
-            navNote = navNoteList.first()
-            data = navNote.data
-            editMode = !navNoteList.any()
-            isNewNote = false
-        }
-    }
+//    LaunchedEffect(navNoteList != null)
+//    {
+//        if(navNoteList != null) {
+//            navNote = navNoteList
+//            data = navNote.data
+//            editMode = !navNoteList.any()
+//            isNewNote = false
+//        }
+//    }
 
     Column(
         modifier = modifier

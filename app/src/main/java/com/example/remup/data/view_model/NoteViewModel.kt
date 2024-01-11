@@ -17,6 +17,6 @@ class NoteViewModel @Inject constructor(private val repository: AppRepository): 
     fun updateNote(note: Note) = viewModelScope.launch( Dispatchers.IO ){repository.updateNote(note)}
     fun deleteNote(note: Note) = viewModelScope.launch(Dispatchers.IO) { repository.deleteNote(note) }
     fun noteList() = repository.noteList()
-    fun noteById(id: Int) = repository.noteById(id)
+    suspend fun noteById(id: Int) = repository.noteById(id)
 
 }

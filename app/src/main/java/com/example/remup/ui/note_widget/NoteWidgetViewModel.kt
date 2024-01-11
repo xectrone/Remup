@@ -18,10 +18,9 @@ class NoteWidgetViewModel @Inject constructor(private val repository:AppReposito
     private val _note = mutableStateOf<String>("")
     val note: State<String> = _note
 
-
     fun getNote() {
         viewModelScope.launch(Dispatchers.IO) {
-            _note.value = repository.firstNote().data
+            _note.value = repository.randomNote().data
         }
     }
 
