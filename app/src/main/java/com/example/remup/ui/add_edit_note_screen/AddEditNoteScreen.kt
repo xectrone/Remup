@@ -25,36 +25,16 @@ import com.example.remup.R
 import com.example.remup.data.model.Note
 import com.example.remup.data.view_model.NoteViewModel
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun AddEditNoteScreen(
     navController: NavController,
     id: Int,
-    noteViewModel: NoteViewModel = hiltViewModel(),
-    modifier: Modifier = Modifier
+    viewModel: AddEditNoteViewModel = hiltViewModel(),
 ) {
-    val keyboard = LocalSoftwareKeyboardController.current
-
-//    val navNoteList = noteViewModel.noteById(id)
-    var navNote by remember { mutableStateOf(Note(0, "")) }
-
-    var isNewNote by rememberSaveable { mutableStateOf(true)}
-    var editMode by remember { mutableStateOf(true)}
-
-    var data by rememberSaveable { mutableStateOf("") }
-
-//    LaunchedEffect(navNoteList != null)
-//    {
-//        if(navNoteList != null) {
-//            navNote = navNoteList
-//            data = navNote.data
-//            editMode = !navNoteList.any()
-//            isNewNote = false
-//        }
-//    }
+    val data by viewModel.data
 
     Column(
-        modifier = modifier
+        modifier = Modifier
             .padding(top = dimensionResource(id = R.dimen.status_bar_top_padding))
             .fillMaxSize()
             .background(MaterialTheme.colors.background)
@@ -69,52 +49,44 @@ fun AddEditNoteScreen(
             IconButton(
                 onClick =
                 {
-                    if(data != "") {
-                        navNote = navNote.updateNote(newData = data)
-                        if (isNewNote) {
-                            noteViewModel.addNote(navNote)
-                            isNewNote = false
-                        } else
-                            noteViewModel.updateNote(navNote)
-                    }
+                    viewModel.onBackClick(id)
                     navController.navigateUp()
                 })
             {
                 Icon(imageVector = Icons.Default.ArrowBack, contentDescription = null, tint = MaterialTheme.colors.primary)
             }
 
-            Spacer(modifier = Modifier.weight(1f))
+//            Spacer(modifier = Modifier.weight(1f))
             //endregion
 
             //region - Edit Button -
-            IconButton(
-
-                onClick = {
-                    if(editMode)
-                    {
-                        editMode = false
-                        keyboard?.hide()
-                        if(data != "") {
-                            navNote = navNote.updateNote(newData = data)
-                            if (isNewNote) {
-                                noteViewModel.addNote(navNote)
-                                isNewNote = false
-                            } else
-                                noteViewModel.updateNote(navNote)
-
-                        }
-                    }
-                    else
-                        editMode = true
-                })
-            {
-                Icon(imageVector = if(editMode) Icons.Default.Check else Icons.Default.Edit, contentDescription = null, tint = MaterialTheme.colors.primary)
-            }
+//            IconButton(
+//
+//                onClick = {
+//                    if(editMode)
+//                    {
+//                        editMode = false
+//                        keyboard?.hide()
+//                        if(data != "") {
+//                            navNote = navNote.updateNote(newData = data)
+//                            if (isNewNote) {
+//                                noteViewModel.addNote(navNote)
+//                                isNewNote = false
+//                            } else
+//                                noteViewModel.updateNote(navNote)
+//
+//                        }
+//                    }
+//                    else
+//                        editMode = true
+//                })
+//            {
+//                Icon(imageVector = if(editMode) Icons.Default.Check else Icons.Default.Edit, contentDescription = null, tint = MaterialTheme.colors.primary)
+//            }
 //            endregion
 
             //region - Close Button -
-            IconButton(
-                onClick = { navController.navigateUp() })
+            IconButton(onClick = { navController.navigateUp() })
             {
                 Icon(imageVector = Icons.Default.Close, contentDescription = null, tint = MaterialTheme.colors.primary)
             }
@@ -123,13 +95,12 @@ fun AddEditNoteScreen(
         }
 
         TextField(
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
                 .padding(horizontal = 7.dp),
             value = data,
-            onValueChange = { data = it },
-            enabled = editMode,
+            onValueChange = { viewModel.onDataChange(it) },
             placeholder = {
                 Text(
                     text = "Type here...",
@@ -153,18 +124,9 @@ fun AddEditNoteScreen(
     }
 
 
-
     //region - Back Press Handler -
     BackHandler() {
-        if(data != "") {
-            navNote = navNote.updateNote(newData = data)
-            if (isNewNote) {
-                noteViewModel.addNote(navNote)
-                isNewNote = false
-            } else
-                noteViewModel.updateNote(navNote)
-
-        }
+        viewModel.onBackClick(id)
         navController.navigateUp()
     }
     //endregion

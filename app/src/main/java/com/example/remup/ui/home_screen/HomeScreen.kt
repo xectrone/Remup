@@ -128,10 +128,6 @@ fun HomeScreen(
                         )
                     }
 
-
-
-
-
                 }
             }
         }
