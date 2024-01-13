@@ -1,5 +1,6 @@
 package com.example.remup.ui.add_edit_note_screen
 
+import android.annotation.SuppressLint
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -24,7 +25,9 @@ import androidx.navigation.NavController
 import com.example.remup.R
 import com.example.remup.data.model.Note
 import com.example.remup.data.view_model.NoteViewModel
+import com.example.remup.ui.theme.Dimen
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun AddEditNoteScreen(
     navController: NavController,
@@ -33,94 +36,132 @@ fun AddEditNoteScreen(
 ) {
     val data by viewModel.data
 
-    Column(
+    Scaffold(
         modifier = Modifier
-            .padding(top = dimensionResource(id = R.dimen.status_bar_top_padding))
             .fillMaxSize()
-            .background(MaterialTheme.colors.background)
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .wrapContentHeight(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-        ) {
-            //region - Back Button -
-            IconButton(
+            .padding(top = Dimen.Padding.statusBar),
+        floatingActionButton =
+        {
+            FloatingActionButton(
+                modifier = Modifier.imePadding(),
+                backgroundColor = MaterialTheme.colors.secondary,
                 onClick =
                 {
                     viewModel.onBackClick(id)
                     navController.navigateUp()
-                })
+                }
+            )
             {
-                Icon(imageVector = Icons.Default.ArrowBack, contentDescription = null, tint = MaterialTheme.colors.primary)
+                Icon(
+                    imageVector = Icons.Default.Check,
+                    contentDescription = "Add",
+                    tint = MaterialTheme.colors.background
+
+                )
+            }
+        },
+        backgroundColor = MaterialTheme.colors.background
+    )
+    {
+
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+            ) {
+                //region - Back Button -
+                IconButton(
+                    onClick =
+                    {
+                        viewModel.onBackClick(id)
+                        navController.navigateUp()
+                    })
+                {
+                    Icon(
+                        imageVector = Icons.Default.ArrowBack,
+                        contentDescription = null,
+                        tint = MaterialTheme.colors.primary
+                    )
+                }
+
+                //            Spacer(modifier = Modifier.weight(1f))
+                //endregion
+
+                //region - Edit Button -
+                //            IconButton(
+                //
+                //                onClick = {
+                //                    if(editMode)
+                //                    {
+                //                        editMode = false
+                //                        keyboard?.hide()
+                //                        if(data != "") {
+                //                            navNote = navNote.updateNote(newData = data)
+                //                            if (isNewNote) {
+                //                                noteViewModel.addNote(navNote)
+                //                                isNewNote = false
+                //                            } else
+                //                                noteViewModel.updateNote(navNote)
+                //
+                //                        }
+                //                    }
+                //                    else
+                //                        editMode = true
+                //                })
+                //            {
+                //                Icon(imageVector = if(editMode) Icons.Default.Check else Icons.Default.Edit, contentDescription = null, tint = MaterialTheme.colors.primary)
+                //            }
+                //            endregion
+
+                //region - Close Button -
+                IconButton(onClick = { navController.navigateUp() })
+                {
+                    Icon(
+                        imageVector = Icons.Default.Close,
+                        contentDescription = null,
+                        tint = MaterialTheme.colors.primary
+                    )
+                }
+                //endregion
+
             }
 
-//            Spacer(modifier = Modifier.weight(1f))
-            //endregion
+            TextField(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(horizontal = 7.dp),
+                value = data,
+                onValueChange = { viewModel.onDataChange(it) },
+                placeholder = {
+                    Text(
+                        text = "Type here...",
+                        fontSize = 16.sp,
+                        color = MaterialTheme.colors.primaryVariant
+                    )
+                },
+                textStyle = TextStyle(
+                    fontSize = 16.sp,
+                    textAlign = TextAlign.Justify,
+                    color = MaterialTheme.colors.primary,
+                ),
+                colors = TextFieldDefaults.textFieldColors(
+                    backgroundColor = Color.Transparent,
+                    cursorColor = MaterialTheme.colors.primaryVariant,
+                    disabledTextColor = Color.Transparent,
+                    focusedIndicatorColor = Color.Transparent,
+                    unfocusedIndicatorColor = Color.Transparent,
+                    disabledIndicatorColor = Color.Transparent
+                ),
+                keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences)
+            )
 
-            //region - Edit Button -
-//            IconButton(
-//
-//                onClick = {
-//                    if(editMode)
-//                    {
-//                        editMode = false
-//                        keyboard?.hide()
-//                        if(data != "") {
-//                            navNote = navNote.updateNote(newData = data)
-//                            if (isNewNote) {
-//                                noteViewModel.addNote(navNote)
-//                                isNewNote = false
-//                            } else
-//                                noteViewModel.updateNote(navNote)
-//
-//                        }
-//                    }
-//                    else
-//                        editMode = true
-//                })
-//            {
-//                Icon(imageVector = if(editMode) Icons.Default.Check else Icons.Default.Edit, contentDescription = null, tint = MaterialTheme.colors.primary)
-//            }
-//            endregion
-
-            //region - Close Button -
-            IconButton(onClick = { navController.navigateUp() })
-            {
-                Icon(imageVector = Icons.Default.Close, contentDescription = null, tint = MaterialTheme.colors.primary)
-            }
-            //endregion
 
         }
-
-        TextField(
-            modifier = Modifier
-                .fillMaxWidth()
-                .wrapContentHeight()
-                .padding(horizontal = 7.dp),
-            value = data,
-            onValueChange = { viewModel.onDataChange(it) },
-            placeholder = {
-                Text(
-                    text = "Type here...",
-                    fontSize = 16.sp,
-                    color = MaterialTheme.colors.primaryVariant)},
-            textStyle = TextStyle(
-                fontSize = 16.sp,
-                textAlign = TextAlign.Justify,
-                color = MaterialTheme.colors.primary,),
-            colors = TextFieldDefaults.textFieldColors(
-                backgroundColor = Color.Transparent,
-                cursorColor = MaterialTheme.colors.primaryVariant,
-                disabledTextColor = Color.Transparent,
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
-                disabledIndicatorColor = Color.Transparent),
-            keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences)
-        )
-
-
     }
 
 

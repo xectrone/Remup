@@ -57,4 +57,12 @@ class HomeViewModel @Inject constructor(private val repository: AppRepository): 
         _noteList.value = _originalNoteList.value
         _selectionMode.value = false
     }
+
+    fun onDelete()
+    {
+        viewModelScope.launch {
+            noteList.value.filter { it.isSelected }.forEach { item -> repository.deleteNote(item.note) }
+            _selectionMode.value = false
+        }
+    }
 }
