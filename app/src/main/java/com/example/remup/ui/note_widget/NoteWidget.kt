@@ -2,6 +2,8 @@ package com.example.remup.ui.note_widget
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
+import android.util.Log
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -33,6 +35,7 @@ import com.example.remup.MainActivity
 import com.example.remup.R
 import com.example.remup.data.database.AppDatabase
 import com.example.remup.data.database.AppRepository
+import com.example.remup.domain.broadcast.SystemBroadcastReceiver
 import com.example.remup.ui.theme.Dimen
 import dagger.hilt.EntryPoint
 import dagger.hilt.EntryPoints
@@ -70,7 +73,7 @@ class NoteWidget : GlanceAppWidget() {
                     style = TextStyle(
                         fontWeight = FontWeight.Normal,
                         fontSize = 16.sp,
-                        color = ColorProvider(R.color.black)
+                        color = ColorProvider(R.color.xml_primary)
                     )
                 )
                 Button(
@@ -86,8 +89,6 @@ class NoteWidget : GlanceAppWidget() {
                     colors = ButtonDefaults.buttonColors(backgroundColor = ColorProvider(Color.Black.copy(alpha = 0.07f)))
 
                 )
-
-
             }
         }
     }
@@ -98,6 +99,7 @@ class RefreshCallback: ActionCallback {
         glanceId: GlanceId,
         parameters: ActionParameters
     ) {
+        Log.d("#TAG", "onAction: ")
         NoteWidget().update(context, glanceId)
     }
 }

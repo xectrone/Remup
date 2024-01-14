@@ -9,7 +9,7 @@
     <color name="white">#FFFFFFFF</color>
 
 
-<!--    <color name="xml_background">#FF000000</color>-->
-<!--    <color name="xml_primary">#FFFFFFFF</color>-->
+    <color name="xml_background">#FF000000</color>
+    <color name="xml_primary">#FFFFFFFF</color>
 
 </resources>
