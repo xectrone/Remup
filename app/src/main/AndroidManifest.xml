@@ -28,16 +28,22 @@
                 android:value="" />
         </activity>
 
-        <receiver android:name=".ui.note_widget.NoteWidgetReceiver" android:exported="true">
+        <activity
+            android:name=".ui.note_widget.WidgetActivity"
+            android:exported="true">
+        </activity>
+
+        <receiver
+            android:name=".ui.note_widget.NoteWidgetReceiver"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
+
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/note_widget_info" />
         </receiver>
-
-
     </application>
 
 </manifest>

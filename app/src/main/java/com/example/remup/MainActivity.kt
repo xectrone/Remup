@@ -33,6 +33,7 @@ class MainActivity : ComponentActivity()
         {
             RemupTheme()
             {
+                Log.d("#TAG", "onCreate: MainActivity")
                 val coroutineScope = rememberCoroutineScope()
                 val context = LocalContext.current
                 SystemBroadcastReceiver(systemAction = Intent.ACTION_CONFIGURATION_CHANGED){

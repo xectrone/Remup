@@ -52,4 +52,11 @@ class AddEditNoteViewModel @Inject constructor(
         }
     }
 
+    fun onDeleteClick(id:Int){
+        if(id != -1)
+            viewModelScope.launch {
+                repository.deleteNote(repository.noteById(id))
+            }
+    }
+
 }

@@ -1,6 +1,8 @@
 package com.example.remup.ui.add_edit_note_screen
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -8,11 +10,16 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.rounded.Add
+import androidx.compose.material.icons.rounded.ArrowBack
+import androidx.compose.material.icons.rounded.Check
+import androidx.compose.material.icons.rounded.Delete
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.TextStyle
@@ -25,6 +32,7 @@ import androidx.navigation.NavController
 import com.example.remup.R
 import com.example.remup.data.model.Note
 import com.example.remup.data.view_model.NoteViewModel
+import com.example.remup.domain.navigation.Screen
 import com.example.remup.ui.theme.Dimen
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -35,11 +43,14 @@ fun AddEditNoteScreen(
     viewModel: AddEditNoteViewModel = hiltViewModel(),
 ) {
     val data by viewModel.data
+    val activity = LocalContext.current as? Activity
 
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
             .padding(top = Dimen.Padding.statusBar),
+
+        //region - Floating Action Button -
         floatingActionButton =
         {
             FloatingActionButton(
@@ -48,18 +59,21 @@ fun AddEditNoteScreen(
                 onClick =
                 {
                     viewModel.onBackClick(id)
-                    navController.navigateUp()
+                    if (!navController.navigateUp())
+                        activity?.finish()
                 }
             )
             {
                 Icon(
-                    imageVector = Icons.Default.Check,
+                    imageVector = Icons.Rounded.Check,
                     contentDescription = "Add",
                     tint = MaterialTheme.colors.background
 
                 )
             }
         },
+        //endregion
+
         backgroundColor = MaterialTheme.colors.background
     )
     {
@@ -79,11 +93,12 @@ fun AddEditNoteScreen(
                     onClick =
                     {
                         viewModel.onBackClick(id)
-                        navController.navigateUp()
+                        if (!navController.navigateUp())
+                            activity?.finish()
                     })
                 {
                     Icon(
-                        imageVector = Icons.Default.ArrowBack,
+                        imageVector = Icons.Rounded.ArrowBack,
                         contentDescription = null,
                         tint = MaterialTheme.colors.primary
                     )
@@ -119,10 +134,16 @@ fun AddEditNoteScreen(
                 //            endregion
 
                 //region - Close Button -
-                IconButton(onClick = { navController.navigateUp() })
+                IconButton(
+                    onClick = {
+                        viewModel.onDeleteClick(id)
+                        if (!navController.navigateUp())
+                            activity?.finish()
+                    }
+                )
                 {
                     Icon(
-                        imageVector = Icons.Default.Close,
+                        imageVector = Icons.Rounded.Delete,
                         contentDescription = null,
                         tint = MaterialTheme.colors.primary
                     )
@@ -168,7 +189,8 @@ fun AddEditNoteScreen(
     //region - Back Press Handler -
     BackHandler() {
         viewModel.onBackClick(id)
-        navController.navigateUp()
+        if (!navController.navigateUp())
+            activity?.finish()
     }
     //endregion
 
