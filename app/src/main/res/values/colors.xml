@@ -8,6 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#f2f2f2</color>
+    <color name="light_gray">#f8f8f8</color>
+
 
     <color name="xml_background">#FFFFFFFF</color>
     <color name="xml_primary">#FF000000</color>

@@ -28,6 +28,6 @@ interface AppDao {
     @Query("SELECT * FROM note_table WHERE id = :id")
     suspend fun noteById(id: Int): Note
 
-    @Query("SELECT * FROM note_table ORDER BY RANDOM() LIMIT 1")
+    @Query("SELECT * FROM note_table WHERE id = (SELECT id FROM note_table ORDER BY RANDOM() LIMIT 1)")
     suspend fun randomNote(): Note
 }

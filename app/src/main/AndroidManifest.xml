@@ -29,21 +29,28 @@
         </activity>
 
         <activity
-            android:name=".ui.note_widget.WidgetActivity"
-            android:exported="true">
+            android:taskAffinity=".ui.add_note_dialog.AddNoteActivity"
+            android:name=".AddNoteActivity"
+            android:exported="true"
+            android:label="Add Note Activity"
+            android:launchMode="singleTask"
+            android:theme="@style/SplashScreen">
         </activity>
 
-        <receiver
-            android:name=".ui.note_widget.NoteWidgetReceiver"
+        <receiver android:name=".ui.note_widget.NoteWidgetProvider"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
-
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/note_widget_info" />
         </receiver>
+
     </application>
+    <!-- AndroidManifest.xml -->
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
 
 </manifest>

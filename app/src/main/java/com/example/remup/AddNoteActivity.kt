@@ -1,4 +1,4 @@
-package com.example.remup.ui.note_widget
+package com.example.remup
 
 import android.os.Bundle
 import android.util.Log
@@ -11,7 +11,7 @@ import com.example.remup.ui.theme.RemupTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class WidgetActivity : ComponentActivity() {
+class AddNoteActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
