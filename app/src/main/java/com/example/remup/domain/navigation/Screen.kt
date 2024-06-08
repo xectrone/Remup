@@ -10,7 +10,4 @@ sealed class Screen(val route: String) {
         fun navArg(id:Int = -1) = "$route?$ID=$id"
     }
 
-    object ShowNote: Screen("SHOW_NOTE_SCREEN")
-
-
 }

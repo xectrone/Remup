@@ -2,26 +2,19 @@ package com.example.remup.ui.add_edit_note_screen
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.util.Log
 import androidx.activity.compose.BackHandler
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
-import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.icons.rounded.Delete
 import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.style.TextAlign
@@ -29,10 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.example.remup.R
-import com.example.remup.data.model.Note
-import com.example.remup.data.view_model.NoteViewModel
-import com.example.remup.domain.navigation.Screen
+import com.example.remup.ui.theme.Constants
 import com.example.remup.ui.theme.Dimen
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -66,7 +56,7 @@ fun AddEditNoteScreen(
             {
                 Icon(
                     imageVector = Icons.Rounded.Check,
-                    contentDescription = "Add",
+                    contentDescription = Constants.Label.ADD,
                     tint = MaterialTheme.colors.background
 
                 )
@@ -99,7 +89,7 @@ fun AddEditNoteScreen(
                 {
                     Icon(
                         imageVector = Icons.Rounded.ArrowBack,
-                        contentDescription = null,
+                        contentDescription = Constants.Label.BACK,
                         tint = MaterialTheme.colors.primary
                     )
                 }
@@ -129,7 +119,7 @@ fun AddEditNoteScreen(
                 //                        editMode = true
                 //                })
                 //            {
-                //                Icon(imageVector = if(editMode) Icons.Default.Check else Icons.Default.Edit, contentDescription = null, tint = MaterialTheme.colors.primary)
+//                                Icon(imageVector = if(editMode) Icons.Default.Check else Icons.Default.Edit, contentDescription = Constants.Label.EDIT, tint = MaterialTheme.colors.primary)
                 //            }
                 //            endregion
 
@@ -144,7 +134,7 @@ fun AddEditNoteScreen(
                 {
                     Icon(
                         imageVector = Icons.Rounded.Delete,
-                        contentDescription = null,
+                        contentDescription = Constants.Label.DELETE,
                         tint = MaterialTheme.colors.primary
                     )
                 }

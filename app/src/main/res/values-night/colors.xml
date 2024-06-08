@@ -11,7 +11,7 @@
     <color name="light_gray">#ebeff2</color>
 
 
-    <color name="xml_background">#FFFFFFFF</color>
-    <color name="xml_primary">#FF000000</color>
+    <color name="xml_background">#FF000000</color>
+    <color name="xml_primary">#FFFFFFFF</color>
 
 </resources>
