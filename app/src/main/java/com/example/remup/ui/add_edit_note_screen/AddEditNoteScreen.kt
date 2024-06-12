@@ -13,9 +13,12 @@ import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.icons.rounded.Delete
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -23,7 +26,9 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.remup.ui.theme.Constants
+import com.example.remup.ui.theme.CustomTypography
 import com.example.remup.ui.theme.Dimen
+import kotlinx.coroutines.delay
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -34,11 +39,18 @@ fun AddEditNoteScreen(
 ) {
     val data by viewModel.data
     val activity = LocalContext.current as? Activity
+    val focusRequester = remember { FocusRequester() }
+
+    LaunchedEffect(Unit) {
+        if (id==-1){
+            delay(200)
+            focusRequester.requestFocus()
+        }
+    }
 
     Scaffold(
         modifier = Modifier
-            .fillMaxSize()
-            .padding(top = Dimen.Padding.statusBar),
+            .fillMaxSize(),
 
         //region - Floating Action Button -
         floatingActionButton =
@@ -75,7 +87,8 @@ fun AddEditNoteScreen(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .wrapContentHeight(),
+                    .wrapContentHeight()
+                    .padding(top = Dimen.Padding.statusBar),
                 horizontalArrangement = Arrangement.SpaceBetween,
             ) {
                 //region - Back Button -
@@ -145,21 +158,17 @@ fun AddEditNoteScreen(
             TextField(
                 modifier = Modifier
                     .fillMaxSize()
+                    .focusRequester(focusRequester)
                     .padding(horizontal = 7.dp),
                 value = data,
                 onValueChange = { viewModel.onDataChange(it) },
-                placeholder = {
+                textStyle = CustomTypography.body,
+                placeholder ={
                     Text(
                         text = "Type here...",
-                        fontSize = 16.sp,
-                        color = MaterialTheme.colors.primaryVariant
+                        style = CustomTypography.body.copy(fontStyle = FontStyle.Italic),
                     )
                 },
-                textStyle = TextStyle(
-                    fontSize = 16.sp,
-                    textAlign = TextAlign.Justify,
-                    color = MaterialTheme.colors.primary,
-                ),
                 colors = TextFieldDefaults.textFieldColors(
                     backgroundColor = Color.Transparent,
                     cursorColor = MaterialTheme.colors.primaryVariant,
