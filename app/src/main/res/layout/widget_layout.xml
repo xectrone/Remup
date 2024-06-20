@@ -4,20 +4,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
     android:background="@drawable/round_corner_rectangle_20dp"
     >
 
     <TextView
         android:id="@+id/widget_note_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Random Note"
-        android:textSize="18sp"
-        android:textColor="@color/black"
-        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="16dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:layout_gravity="center_horizontal|clip_horizontal"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:fontFamily="@font/roboto_slab"
         android:gravity="center"
-        android:layout_weight="1"/>
+        android:maxLines="6"
+        android:text="NO NOTE AVAILABLE!"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,16 +35,26 @@
             android:id="@+id/update_widget_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/round_corner_rectangle_5dp"
-            android:padding="10dp"
             android:clickable="true"
             android:focusable="true"
-            android:src="@drawable/baseline_autorenew_24"
+            android:padding="16dp"
+            android:src="@drawable/round_autorenew_24"
+            android:contentDescription="Widget Refresh Button"
             />
-        <LinearLayout
+
+        <TextView
+            android:id="@+id/widget_note_date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:fontFamily="@font/roboto_slab"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="20 Jan 2024"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
 
         <ImageView
             android:id="@+id/add_note_widget_button"
@@ -47,11 +62,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:foregroundGravity="right"
-            android:background="@drawable/round_corner_rectangle_5dp"
-            android:padding="10dp"
             android:clickable="true"
             android:focusable="true"
-            android:src="@drawable/baseline_add_24"
-            />
+            android:padding="16dp"
+            android:src="@drawable/round_add_24"
+            android:contentDescription="Widget Add Note Button"/>
     </LinearLayout>
 </LinearLayout>

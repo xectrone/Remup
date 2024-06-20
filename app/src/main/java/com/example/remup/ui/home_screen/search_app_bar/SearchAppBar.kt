@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.remup.R
 import com.example.remup.ui.theme.Constants
+import com.example.remup.ui.theme.LocalCustomColorPalette
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -41,7 +42,7 @@ fun SearchAppBar(
             .fillMaxWidth()
             .wrapContentHeight(),
         elevation = dimensionResource(id = R.dimen.top_bar_elevation),
-        color = MaterialTheme.colors.background
+        color = LocalCustomColorPalette.current.background
     ) {
         //region - Text Field -
         TextField(
@@ -61,19 +62,19 @@ fun SearchAppBar(
             Text(
                     text = "Search here...",
                     fontSize = 15.sp,
-                    color = MaterialTheme.colors.primaryVariant
+                    color = LocalCustomColorPalette.current.secondary
                 )
             },
             textStyle = TextStyle(
                 fontSize = 15.sp,
-                color = MaterialTheme.colors.primary
+                color = LocalCustomColorPalette.current.primary
             ),
             singleLine = true,
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.Search,
                     contentDescription = Constants.Label.SEARCH,
-                    tint = MaterialTheme.colors.primaryVariant
+                    tint = LocalCustomColorPalette.current.secondary
                 )
             },
             trailingIcon = {
@@ -89,7 +90,7 @@ fun SearchAppBar(
                     Icon(
                         imageVector = Icons.Default.Close,
                         contentDescription = "Close",
-                        tint = MaterialTheme.colors.primaryVariant
+                        tint = LocalCustomColorPalette.current.secondary
                     )
                 }
 
@@ -98,8 +99,8 @@ fun SearchAppBar(
             keyboardActions = KeyboardActions(onSearch = { onSearchClicked(text) }),
 
             colors = TextFieldDefaults.textFieldColors(
-                backgroundColor = MaterialTheme.colors.surface,
-                cursorColor = if (isSearching) MaterialTheme.colors.primaryVariant else Color.Transparent,
+                backgroundColor = LocalCustomColorPalette.current.surface,
+                cursorColor = if (isSearching) LocalCustomColorPalette.current.secondary else Color.Transparent,
                 disabledTextColor = Color.Transparent,
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent,

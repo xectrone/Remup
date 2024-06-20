@@ -17,6 +17,8 @@ import com.example.remup.data.database.AppDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
 
 class NoteWidgetProvider : AppWidgetProvider() {
 
@@ -62,11 +64,12 @@ class NoteWidgetProvider : AppWidgetProvider() {
                 try {
                     val db = AppDatabase.getInstance(context)
                     val note = db.dao.randomNote()
-                    val randomNote = note?.data ?: "No notes available"
-                    Log.d(TAG, "Random Note: $randomNote")
+                    val noteData = note?.data ?: "No notes available"
+                    val noteDate = note?.created?.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))
 
                     val views = RemoteViews(context.packageName, R.layout.widget_layout)
-                    views.setTextViewText(R.id.widget_note_text, randomNote)
+                    views.setTextViewText(R.id.widget_note_text, noteData)
+                    views.setTextViewText(R.id.widget_note_date, noteDate)
 
                     // Set up button click handler for updating the note
                     val updateIntent = Intent(context, NoteWidgetProvider::class.java).apply {

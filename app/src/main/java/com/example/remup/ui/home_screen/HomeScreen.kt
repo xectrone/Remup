@@ -13,7 +13,6 @@ import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -27,6 +26,7 @@ import com.example.remup.ui.home_screen.search_app_bar.SearchAppBar
 import com.example.remup.ui.home_screen.search_app_bar.SearchAppBarState
 import com.example.remup.ui.home_screen.search_app_bar.SearchAppBarViewModel
 import com.example.remup.ui.theme.Constants
+import com.example.remup.ui.theme.LocalCustomColorPalette
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -65,8 +65,8 @@ fun HomeScreen(
             else
             {
                 TopAppBar(
-                    backgroundColor = MaterialTheme.colors.background,
-                    contentColor = MaterialTheme.colors.primary,
+                    backgroundColor = LocalCustomColorPalette.current.background,
+                    contentColor = LocalCustomColorPalette.current.primary,
                     modifier = Modifier.padding(top = 42.dp, bottom = 12.dp),
                     elevation = 0.dp,
                     title = {
@@ -107,13 +107,13 @@ fun HomeScreen(
                     navController.navigate(route = Screen.AddEditNote.navArg())
                 },
 
-                backgroundColor = MaterialTheme.colors.secondary
+                backgroundColor = LocalCustomColorPalette.current.accent
             )
             {
                 Icon(
                     imageVector = Icons.Default.Add,
                     contentDescription = Constants.Label.ADD,
-                    tint = MaterialTheme.colors.surface
+                    tint = LocalCustomColorPalette.current.surface
                 )
             }
         }

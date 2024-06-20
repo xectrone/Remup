@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId "com.xectrone.remup"
-        minSdk 21
+        minSdk 26
         targetSdk 33
         versionCode 6
         versionName "1.0.6"

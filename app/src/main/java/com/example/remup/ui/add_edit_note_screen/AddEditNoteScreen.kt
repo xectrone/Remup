@@ -17,17 +17,15 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.input.KeyboardCapitalization
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.remup.ui.theme.Constants
 import com.example.remup.ui.theme.CustomTypography
 import com.example.remup.ui.theme.Dimen
+import com.example.remup.ui.theme.LocalCustomColorPalette
 import kotlinx.coroutines.delay
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -57,7 +55,7 @@ fun AddEditNoteScreen(
         {
             FloatingActionButton(
                 modifier = Modifier.imePadding(),
-                backgroundColor = MaterialTheme.colors.secondary,
+                backgroundColor = LocalCustomColorPalette.current.accent,
                 onClick =
                 {
                     viewModel.onBackClick(id)
@@ -69,14 +67,14 @@ fun AddEditNoteScreen(
                 Icon(
                     imageVector = Icons.Rounded.Check,
                     contentDescription = Constants.Label.ADD,
-                    tint = MaterialTheme.colors.background
+                    tint = LocalCustomColorPalette.current.background
 
                 )
             }
         },
         //endregion
 
-        backgroundColor = MaterialTheme.colors.background
+        backgroundColor = LocalCustomColorPalette.current.background
     )
     {
 
@@ -103,7 +101,7 @@ fun AddEditNoteScreen(
                     Icon(
                         imageVector = Icons.Rounded.ArrowBack,
                         contentDescription = Constants.Label.BACK,
-                        tint = MaterialTheme.colors.primary
+                        tint = LocalCustomColorPalette.current.primary
                     )
                 }
 
@@ -132,7 +130,7 @@ fun AddEditNoteScreen(
                 //                        editMode = true
                 //                })
                 //            {
-//                                Icon(imageVector = if(editMode) Icons.Default.Check else Icons.Default.Edit, contentDescription = Constants.Label.EDIT, tint = MaterialTheme.colors.primary)
+//                                Icon(imageVector = if(editMode) Icons.Default.Check else Icons.Default.Edit, contentDescription = Constants.Label.EDIT, tint = LocalCustomColorPalette.current.primary)
                 //            }
                 //            endregion
 
@@ -148,7 +146,7 @@ fun AddEditNoteScreen(
                     Icon(
                         imageVector = Icons.Rounded.Delete,
                         contentDescription = Constants.Label.DELETE,
-                        tint = MaterialTheme.colors.primary
+                        tint = LocalCustomColorPalette.current.primary
                     )
                 }
                 //endregion
@@ -171,7 +169,7 @@ fun AddEditNoteScreen(
                 },
                 colors = TextFieldDefaults.textFieldColors(
                     backgroundColor = Color.Transparent,
-                    cursorColor = MaterialTheme.colors.primaryVariant,
+                    cursorColor = LocalCustomColorPalette.current.secondary,
                     disabledTextColor = Color.Transparent,
                     focusedIndicatorColor = Color.Transparent,
                     unfocusedIndicatorColor = Color.Transparent,

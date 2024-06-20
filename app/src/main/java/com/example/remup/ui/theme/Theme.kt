@@ -5,6 +5,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.graphics.Color
 
 private val DarkColorPalette = darkColors(
@@ -32,10 +33,18 @@ fun RemupTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable 
         LightColorPalette
     }
 
-    MaterialTheme(
-        colors = colors,
-        typography = Typography,
-        shapes = Shapes,
-        content = content
-    )
+    val customColorsPalette =
+        if (darkTheme) OnDarkCustomColorPalette
+        else OnLightCustomColorPalette
+
+    CompositionLocalProvider(
+        LocalCustomColorPalette provides customColorsPalette
+    ){
+        MaterialTheme(
+            colors = colors,
+            typography = Typography,
+            shapes = Shapes,
+            content = content
+        )
+    }
 }
