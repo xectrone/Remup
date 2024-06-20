@@ -66,7 +66,7 @@ fun AddEditNoteScreen(
             {
                 Icon(
                     imageVector = Icons.Rounded.Check,
-                    contentDescription = Constants.Label.ADD,
+                    contentDescription = Constants.Labels.ADD,
                     tint = LocalCustomColorPalette.current.background
 
                 )
@@ -100,7 +100,7 @@ fun AddEditNoteScreen(
                 {
                     Icon(
                         imageVector = Icons.Rounded.ArrowBack,
-                        contentDescription = Constants.Label.BACK,
+                        contentDescription = Constants.Labels.BACK,
                         tint = LocalCustomColorPalette.current.primary
                     )
                 }
@@ -145,7 +145,7 @@ fun AddEditNoteScreen(
                 {
                     Icon(
                         imageVector = Icons.Rounded.Delete,
-                        contentDescription = Constants.Label.DELETE,
+                        contentDescription = Constants.Labels.DELETE,
                         tint = LocalCustomColorPalette.current.primary
                     )
                 }

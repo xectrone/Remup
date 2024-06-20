@@ -73,7 +73,7 @@ fun SearchAppBar(
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.Search,
-                    contentDescription = Constants.Label.SEARCH,
+                    contentDescription = Constants.Labels.SEARCH,
                     tint = LocalCustomColorPalette.current.secondary
                 )
             },

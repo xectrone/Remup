@@ -2,6 +2,7 @@ package com.example.remup.data.hilt.di
 
 import android.app.Application
 import androidx.room.Room
+import androidx.room.RoomDatabase
 import com.example.remup.data.database.AppDatabase
 import com.example.remup.data.database.AppRepository
 import dagger.Module
@@ -18,11 +19,9 @@ class AppModule
     @Singleton
     fun provideAppDatabase(app: Application): AppDatabase
     {
-        return Room.databaseBuilder(
-            app,
-            AppDatabase::class.java,
-            "database"
-        ).build()
+        return Room.databaseBuilder(app, AppDatabase::class.java, "database")
+            .setJournalMode(journalMode = RoomDatabase.JournalMode.TRUNCATE)
+            .build()
     }
 
     @Provides

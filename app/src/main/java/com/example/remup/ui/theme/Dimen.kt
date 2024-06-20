@@ -16,4 +16,12 @@ object Dimen {
         val statusBar = 30.dp
     }
 
+    object TopBar {
+        val elevation = 0.dp
+        val height = 56.dp
+    }
+
+
+
+
 }

@@ -6,6 +6,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.example.remup.ui.settings_screen.SettingsScreen
 import com.example.remup.ui.add_edit_note_screen.AddEditNoteScreen
 import com.example.remup.ui.home_screen.HomeScreen
 import com.example.remup.ui.theme.Constants.ID
@@ -27,6 +28,10 @@ fun HomeScreenNavGraph(navController: NavHostController)
                     defaultValue = -1
                 })) {
             AddEditNoteScreen(navController = navController, id = it.arguments!!.getInt(ID))
+        }
+
+        composable(route = Screen.Setting.route) {
+            SettingsScreen(navController = navController)
         }
 
     }

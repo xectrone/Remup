@@ -4,7 +4,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.remup.data.database.AppRepository
-import com.example.remup.data.model.Note
 import com.example.remup.ui.home_screen.search_app_bar.NoteSelectionListItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -64,5 +63,10 @@ class HomeViewModel @Inject constructor(private val repository: AppRepository): 
             noteList.value.filter { it.isSelected }.forEach { item -> repository.deleteNote(item.note) }
             _selectionMode.value = false
         }
+    }
+
+    fun onSerchClose(){
+        _noteList.value = _originalNoteList.value
+        _selectionMode.value = false
     }
 }
