@@ -19,3 +19,10 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-keep class com.google.api.services.drive.** {*;}
+-keep class com.google.api.client.** {*;}
+-keepattributes Signature,RuntimeVisibleAnnotations,AnnotationDefault
+-keep class com.google.** { *;}
+-keep interface com.google.** { *;}
+-dontwarn com.google.**

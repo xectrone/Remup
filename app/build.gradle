@@ -3,10 +3,11 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+
 }
 
 android {
-    namespace 'com.example.remup'
+    namespace 'com.xectrone.remup'
     compileSdk 33
 
     defaultConfig {
@@ -45,6 +46,7 @@ android {
     packagingOptions {
         resources {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
+            exclude 'META-INF/DEPENDENCIES'
         }
     }
 }
@@ -87,4 +89,8 @@ dependencies {
 
     // Kotlin Extensions and Coroutines support for Room
     implementation "androidx.room:room-ktx:2.3.0"
+
+
+
+
 }
