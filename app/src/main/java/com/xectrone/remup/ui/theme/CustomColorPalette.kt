@@ -23,7 +23,7 @@ val LocalCustomColorPalette = staticCompositionLocalOf { CustomColorPalette() }
 
 val OnLightCustomColorPalette = CustomColorPalette(
     primary = Color(0xFF191919),
-    secondary = Color(0xFF7F7F7F),
+    secondary = Color(0xFF494949),
     tertiary = Color(0xFF828484),
     quaternary = Color(0xFFCDD0D0),
     background = Color(0xFFEDEDED),
@@ -36,7 +36,7 @@ val OnLightCustomColorPalette = CustomColorPalette(
 
 val OnDarkCustomColorPalette = CustomColorPalette(
     primary = Color(0xFFE9E9E9 ),
-    secondary = Color(0xFF8C8C8C),
+    secondary = Color(0xFFCBCBCB),
     tertiary = Color(0xFF828484),
     quaternary = Color(0xFF4F5151),
     background = Color(color = 0xFF000000),

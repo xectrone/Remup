@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.xectrone.remup.ui.theme.LocalCustomColorPalette
@@ -52,8 +53,9 @@ fun NoteListItem(item: NoteSelectionListItem, onClick: ()-> Unit, onLongClick: (
                     .padding(bottom = 15.dp),
                 text = item.note.data,
                 color = LocalCustomColorPalette.current.primary,
-                softWrap = true,
                 maxLines = 4,
+                overflow = TextOverflow.Ellipsis
+
             )
 
             Text(

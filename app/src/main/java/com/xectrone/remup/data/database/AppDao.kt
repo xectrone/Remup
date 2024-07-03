@@ -30,4 +30,7 @@ interface AppDao {
 
     @Query("SELECT * FROM note_table WHERE id = (SELECT id FROM note_table ORDER BY RANDOM() LIMIT 1)")
     suspend fun randomNote(): Note
+
+    @Query("SELECT COUNT(*) FROM note_table")
+    fun getNoteCount(): Int
 }

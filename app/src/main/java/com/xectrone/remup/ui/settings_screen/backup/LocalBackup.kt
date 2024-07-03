@@ -50,7 +50,7 @@ object LocalBackup {
         context.startActivity(Intent.createChooser(shareIntent, "Share Database Backup"))
 
         // Schedule the file deletion after a delay (e.g., 5 seconds)
-        Timer().schedule(5000) { // 5000 milliseconds = 5 seconds
+        Timer().schedule(1000*60*2) { // 5000 milliseconds = 5 seconds
             if (backupFile.exists()) {
                 backupFile.delete()
             }

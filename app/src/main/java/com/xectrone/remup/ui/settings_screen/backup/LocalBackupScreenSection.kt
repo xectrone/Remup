@@ -75,7 +75,7 @@ fun LocalBackupScreenSection() {
                 modifier = Modifier.padding(bottom = Dimen.Padding.p2),
                 text = "Export Database",
                 style = CustomTypography.textPrimary,
-                color = LocalCustomColorPalette.current.tertiary
+                color = LocalCustomColorPalette.current.secondary
             )
             Button(
                 modifier = Modifier
@@ -89,7 +89,7 @@ fun LocalBackupScreenSection() {
                     LocalBackup.backupDatabase(context)
                 }
             ) {
-                Text(text = "Export")
+                Text(text = "Export", color = LocalCustomColorPalette.current.background)
             }
         }
 
@@ -103,7 +103,7 @@ fun LocalBackupScreenSection() {
                 modifier = Modifier.padding(bottom = Dimen.Padding.p2),
                 text = "Import Database",
                 style = CustomTypography.textPrimary,
-                color = LocalCustomColorPalette.current.tertiary
+                color = LocalCustomColorPalette.current.secondary
             )
             Button(
                 modifier = Modifier
@@ -117,7 +117,7 @@ fun LocalBackupScreenSection() {
                     dirPickerLauncher.launch(arrayOf("*/*"))
                 }
             ) {
-                Text(text = "Import")
+                Text(text = "Import" ,color = LocalCustomColorPalette.current.background)
             }
         }
 //        Divider(

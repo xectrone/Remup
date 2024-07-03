@@ -16,7 +16,6 @@ import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -28,6 +27,8 @@ import com.xectrone.remup.ui.home_screen.search_app_bar.SearchAppBar
 import com.xectrone.remup.ui.home_screen.search_app_bar.SearchAppBarState
 import com.xectrone.remup.ui.home_screen.search_app_bar.SearchAppBarViewModel
 import com.xectrone.remup.ui.theme.Constants
+import com.xectrone.remup.ui.theme.CustomTypography
+import com.xectrone.remup.ui.theme.Dimen
 import com.xectrone.remup.ui.theme.LocalCustomColorPalette
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -74,13 +75,17 @@ fun HomeScreen(
                     title = {
                         Text(
                             text = stringResource(id = R.string.app_name),
-                            fontWeight =  FontWeight.Bold
+                            style = CustomTypography.h2,
+                            color = LocalCustomColorPalette.current.primary
                         )
                     },
                     navigationIcon = {
-                        IconButton(onClick = {}) {
-                            Icon(imageVector = Icons.Default.Menu, contentDescription = Constants.Labels.MENU)
-                        }
+                            Icon(modifier = Modifier.padding(Dimen.Padding.p3),
+                                imageVector = Icons.Default.Menu,
+                                contentDescription = Constants.Labels.MENU,
+                                tint = LocalCustomColorPalette.current.primary
+                            )
+
                     },
                     actions =
                     {
@@ -88,11 +93,17 @@ fun HomeScreen(
                         {
                             if (selectionMode && (noteList.any { it.isSelected })) {
                                 IconButton(onClick = { viewModel.onDelete() }) {
-                                    Icon(imageVector = Icons.Default.Delete, contentDescription = Constants.Labels.DELETE)
+                                    Icon(imageVector = Icons.Default.Delete,
+                                        contentDescription = Constants.Labels.DELETE,
+                                        tint = LocalCustomColorPalette.current.primary
+                                        )
                                 }
                             }
                             IconButton(onClick = { searchAppBarViewModel.updateSearchAppBarState(SearchAppBarState.OPENED) }) {
-                                Icon(imageVector = Icons.Default.Search, contentDescription = Constants.Labels.SEARCH)
+                                Icon(imageVector = Icons.Default.Search,
+                                    contentDescription = Constants.Labels.SEARCH,
+                                    tint = LocalCustomColorPalette.current.primary
+                                )
                             }
                             IconButton(
                                 onClick =
@@ -100,7 +111,10 @@ fun HomeScreen(
                                     navController.navigate(Screen.Setting.route)
                                 }
                             )
-                            { Icon(imageVector = Icons.Rounded.Settings, contentDescription = Constants.Labels.SETTINGS) }
+                            { Icon(imageVector = Icons.Rounded.Settings,
+                                contentDescription = Constants.Labels.SETTINGS,
+                                tint = LocalCustomColorPalette.current.primary
+                            ) }
 
 
                         }

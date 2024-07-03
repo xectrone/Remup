@@ -8,12 +8,14 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.os.Bundle
 import android.os.SystemClock
 import android.util.Log
 import android.widget.RemoteViews
 import com.xectrone.remup.R
 import com.xectrone.remup.AddNoteActivity
 import com.xectrone.remup.data.database.AppDatabase
+import com.xectrone.remup.data.model.Note
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -54,18 +56,35 @@ class NoteWidgetProvider : AppWidgetProvider() {
 
     companion object {
         private const val UPDATE_INTERVAL_MILLIS = 24 * 60 * 60 * 1000L // 1 day
-//        private const val UPDATE_INTERVAL_MILLIS = 1 * 1000L // 1 day
         private const val ACTION_WIDGET_UPDATE = "com.xectrone.remup.ACTION_WIDGET_UPDATE"
         private const val TAG = "NoteWidgetProvider"
 
         fun updateAppWidget(context: Context, appWidgetManager: AppWidgetManager, appWidgetId: Int) {
             Log.d(TAG, "updateAppWidget called")
+
             CoroutineScope(Dispatchers.IO).launch {
                 try {
                     val db = AppDatabase.getInstance(context)
-                    val note = db.dao.randomNote()
-                    val noteData = note?.data ?: "No notes available"
-                    val noteDate = note?.created?.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))
+                    val noteDao = db.dao
+                    val totalNotes = noteDao.getNoteCount() // Assuming this method returns the count of notes
+
+                    var note: Note? = null
+
+                    // Retrieve the last note ID stored in the widget's extras
+                    val lastNoteId = AppWidgetManager.getInstance(context).getAppWidgetOptions(appWidgetId)
+                        .getInt("LAST_NOTE_ID", -1)
+
+                    // Fetch a new note if there are more than 1 notes and it's not the same as the last one
+                    if (totalNotes > 1) {
+                        do {
+                            note = noteDao.randomNote()
+                        } while (note?.id == lastNoteId) // Repeat if the same note is fetched
+                    } else {
+                        note = noteDao.randomNote() // Just fetch any note if 2 or fewer notes
+                    }
+
+                    var noteData: String = note?.data ?: "No notes available"
+                    var noteDate: String? = note?.created?.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))
 
                     val views = RemoteViews(context.packageName, R.layout.widget_layout)
                     views.setTextViewText(R.id.widget_note_text, noteData)
@@ -87,13 +106,20 @@ class NoteWidgetProvider : AppWidgetProvider() {
                     )
                     views.setOnClickPendingIntent(R.id.add_note_widget_button, openMainPendingIntent)
 
+                    // Store the current note's ID in the widget's options to remember it for the next update
+                    val options = Bundle()
+                    options.putInt("LAST_NOTE_ID", note?.id ?: -1)
+                    AppWidgetManager.getInstance(context).updateAppWidgetOptions(appWidgetId, options)
+
                     appWidgetManager.updateAppWidget(appWidgetId, views)
                     Log.d(TAG, "Widget updated with new note")
+
                 } catch (e: Exception) {
                     Log.e(TAG, "Error fetching random note", e)
                 }
             }
         }
+
 
         private fun scheduleUpdate(context: Context) {
             val intent = Intent(context, NoteWidgetProvider::class.java).apply {
