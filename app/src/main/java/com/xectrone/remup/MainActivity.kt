@@ -22,7 +22,6 @@ class MainActivity : ComponentActivity()
             RemupTheme()
             {
                 HomeScreenNavGraph(navController = rememberAnimatedNavController())
-
             }
         }
     }
