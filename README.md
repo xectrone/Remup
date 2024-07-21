@@ -7,9 +7,8 @@
 ![Compose](https://img.shields.io/badge/Compose-1.4.0-green.svg)
 ![Hilt](https://img.shields.io/badge/Hilt-2.45-brightgreen.svg)
 ![Room](https://img.shields.io/badge/Room-2.5.0-blue.svg)
+[![Android API](https://img.shields.io/badge/Android%20API-26%2B-brightgreen)](https://developer.android.com/studio/releases/platforms)
 ![Version](https://img.shields.io/badge/Version-1.0.10-brightgreen.svg)
-![MinSdk](https://img.shields.io/badge/Min%20SDK-26-blue.svg)
-![TargetSdk](https://img.shields.io/badge/Target%20SDK-34-blue.svg)
 
 </h1>
 
