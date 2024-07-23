@@ -80,11 +80,12 @@ fun HomeScreen(
                         )
                     },
                     navigationIcon = {
-                            Icon(modifier = Modifier.padding(Dimen.Padding.p3),
-                                imageVector = Icons.Default.Menu,
+                        IconButton(onClick = {}) {
+                            Icon(imageVector = Icons.Default.Menu,
                                 contentDescription = Constants.Labels.MENU,
                                 tint = LocalCustomColorPalette.current.primary
                             )
+                        }
 
                     },
                     actions =
