@@ -79,15 +79,15 @@ fun HomeScreen(
                             color = LocalCustomColorPalette.current.primary
                         )
                     },
-                    navigationIcon = {
-                        IconButton(onClick = {}) {
-                            Icon(imageVector = Icons.Default.Menu,
-                                contentDescription = Constants.Labels.MENU,
-                                tint = LocalCustomColorPalette.current.primary
-                            )
-                        }
-
-                    },
+//                    navigationIcon = {
+//                        IconButton(onClick = {}) {
+//                            Icon(imageVector = Icons.Default.Menu,
+//                                contentDescription = Constants.Labels.MENU,
+//                                tint = LocalCustomColorPalette.current.primary
+//                            )
+//                        }
+//
+//                    },
                     actions =
                     {
                         Row()
