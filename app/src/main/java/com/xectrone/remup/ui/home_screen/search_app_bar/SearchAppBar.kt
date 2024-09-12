@@ -59,11 +59,11 @@ fun SearchAppBar(
                     isSearching = true
             },
             placeholder = {
-            Text(
-                    text = "Search here...",
-                    fontSize = 15.sp,
-                    color = LocalCustomColorPalette.current.secondary
-                )
+                Text(
+                        text = "Search here...",
+                        fontSize = 15.sp,
+                        color = LocalCustomColorPalette.current.secondary
+                    )
             },
             textStyle = TextStyle(
                 fontSize = 15.sp,
@@ -100,7 +100,7 @@ fun SearchAppBar(
 
             colors = TextFieldDefaults.textFieldColors(
                 backgroundColor = LocalCustomColorPalette.current.surface,
-                cursorColor = if (isSearching) LocalCustomColorPalette.current.secondary else Color.Transparent,
+                cursorColor = LocalCustomColorPalette.current.secondary,
                 disabledTextColor = Color.Transparent,
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent,

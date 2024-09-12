@@ -18,6 +18,15 @@ object Constants {
         const val EDIT = "Edit selected item"
         const val SETTINGS = "Settings"
 
+        object SortOptions {
+            const val contentASC = "By Content ASC"
+            const val cotnentDESC = "By Content DESC"
+            const val lastModifiedASC = "By Date ASC"
+            const val lastModifiedDESC = "By Date DESC"
+        }
+    }
 
+    object Toast{
+        const val DOUBLE_BACK = "Press back again to exit"
     }
 }

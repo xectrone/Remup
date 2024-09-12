@@ -16,4 +16,9 @@ class SearchAppBarViewModel : ViewModel()
 
     fun updateSearchTextState(newValue: String)
     {_searchTextState.value = newValue}
+
+    fun onSearchClosed(){
+        _searchTextState.value = ""
+        _searchAppBarState.value = SearchAppBarState.CLOSED
+    }
 }

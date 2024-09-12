@@ -24,10 +24,10 @@ import java.time.format.FormatStyle
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun NoteListItem(item: NoteSelectionListItem, onClick: ()-> Unit, onLongClick: ()-> Unit)
+fun NoteListItem(modifier: Modifier = Modifier ,item: NoteSelectionListItem, onClick: ()-> Unit, onLongClick: ()-> Unit)
 {
     Card(
-        modifier = Modifier
+        modifier = modifier
             .padding(4.5.dp)
             .height(150.dp)
             .combinedClickable(
